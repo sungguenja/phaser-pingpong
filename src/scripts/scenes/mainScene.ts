@@ -1,6 +1,7 @@
 import PhaserLogo from '../objects/phaserLogo'
 import PingPongBall from '../objects/pingPongBall'
 import FpsText from '../objects/fpsText'
+import PlayerPaddle from '../objects/playerPaddle'
 
 export default class MainScene extends Phaser.Scene {
   fpsText
@@ -10,8 +11,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    const phaser = new PhaserLogo(this, this.cameras.main.width / 2, 0)
     const ball = new PingPongBall(this, this.cameras.main.width / 2, this.cameras.main.height / 2)
+    const player = new PlayerPaddle(this, this.cameras.main.width, this.cameras.main.height / 2)
     this.fpsText = new FpsText(this)
 
     // display the Phaser.VERSION
@@ -21,7 +22,7 @@ export default class MainScene extends Phaser.Scene {
         fontSize: '24px'
       })
       .setOrigin(1, 0)
-    this.physics.add.collider(phaser, ball)
+    this.physics.add.collider(ball, player)
   }
 
   update() {
